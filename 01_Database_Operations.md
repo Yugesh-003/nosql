@@ -1,9 +1,24 @@
-# Database Operations
+# Install & Configure MongoDB
+
+## Open MongoDB Shell
+
+```javascript
+mongosh
+```
 
 ## Create / Switch Database
 
 ```javascript
 use studentDB
+```
+
+## Create Database (Insert First Document)
+
+```javascript
+db.students.insertOne({
+    name: "John",
+    age: 20
+})
 ```
 
 ## Current Database
@@ -18,18 +33,15 @@ db
 show dbs
 ```
 
+## Show Collections
+
+```javascript
+show collections
+```
+
 ## Delete Database
 
 ```javascript
 use studentDB
 db.dropDatabase()
-```
-
-## Useful Commands
-
-```javascript
-show collections
-db.students.find()
-db.students.findOne()
-db.students.countDocuments()
 ```
