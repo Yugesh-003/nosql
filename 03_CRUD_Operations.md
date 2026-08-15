@@ -2,6 +2,8 @@
 
 ## Create
 
+> Inserts a single student document with rollNo, name, department, and marks into the `students` collection.
+
 ```javascript
 db.students.insertOne({
     rollNo:101,
@@ -10,6 +12,8 @@ db.students.insertOne({
     marks:85
 })
 ```
+
+> Inserts multiple student documents at once by passing an array of objects.
 
 ```javascript
 db.students.insertMany([
@@ -20,19 +24,27 @@ db.students.insertMany([
 
 ## Read
 
+> Retrieves and displays all documents in the `students` collection.
+
 ```javascript
 db.students.find()
 ```
 
+> Finds and returns only the first document where `rollNo` equals 101.
+
 ```javascript
 db.students.findOne({rollNo:101})
 ```
+
+> Finds all students whose marks are greater than 85 (`$gt` means "greater than").
 
 ```javascript
 db.students.find({marks:{$gt:85}})
 ```
 
 ## Update
+
+> Finds the student with `rollNo` 101 and updates their marks to 92 using `$set` (only changes that one field).
 
 ```javascript
 db.students.updateOne(
@@ -42,6 +54,8 @@ db.students.updateOne(
 ```
 
 ## Delete
+
+> Finds and deletes the first document where `rollNo` equals 101.
 
 ```javascript
 db.students.deleteOne({rollNo:101})

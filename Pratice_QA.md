@@ -10,6 +10,8 @@ The question asks you to create `CollegeDB`, insert students, perform CRUD, and 
 
 ### Create database and collection
 
+> Switches to (or creates) `CollegeDB`, then explicitly creates an empty `students` collection.
+
 ```javascript
 use CollegeDB
 
@@ -17,6 +19,8 @@ db.createCollection("students")
 ```
 
 ### Insert documents
+
+> Inserts 5 student documents at once with fields like rollNo, name, department, year, and marks.
 
 ```javascript
 db.students.insertMany([
@@ -60,17 +64,21 @@ db.students.insertMany([
 
 ### READ
 
+> Retrieves and displays every document in the `students` collection.
+
 ```javascript
 db.students.find()
 ```
 
-Find one:
+> Returns only the first document where `rollNo` equals 101.
 
 ```javascript
 db.students.findOne({ rollNo: 101 })
 ```
 
 ### UPDATE
+
+> Finds student with `rollNo` 101 and changes only their `marks` field to 90 — all other fields remain untouched.
 
 ```javascript
 db.students.updateOne(
@@ -81,11 +89,15 @@ db.students.updateOne(
 
 ### DELETE
 
+> Permanently removes the first document where `rollNo` equals 105 from the collection.
+
 ```javascript
 db.students.deleteOne({ rollNo: 105 })
 ```
 
 ### Aggregation — Average marks department-wise
+
+> Groups students by department, calculates average marks, hides the `_id` field, renames it to `department`, sorts by highest average first, and returns only the top 3 departments.
 
 ```javascript
 db.students.aggregate([
@@ -123,6 +135,8 @@ $group → $project → $sort → $limit
 
 The question requires patient CRUD and an aggregation that matches a disease, groups patients by doctor, counts them, and sorts by count. 
 
+> Switches to `HospitalDB` and creates an empty `patients` collection.
+
 ```javascript
 use HospitalDB
 
@@ -130,6 +144,8 @@ db.createCollection("patients")
 ```
 
 ### Insert
+
+> Inserts 4 patient documents, each with details like disease and assigned doctor.
 
 ```javascript
 db.patients.insertMany([
@@ -170,11 +186,15 @@ db.patients.insertMany([
 
 ### Query
 
+> Finds all patients whose `disease` field is exactly "Diabetes".
+
 ```javascript
 db.patients.find({ disease: "Diabetes" })
 ```
 
 ### Update
+
+> Updates only the `age` field of patient 1 to 36, leaving all other fields unchanged.
 
 ```javascript
 db.patients.updateOne(
@@ -185,11 +205,15 @@ db.patients.updateOne(
 
 ### Delete
 
+> Removes the document for patient 4 from the collection.
+
 ```javascript
 db.patients.deleteOne({ patientId: 4 })
 ```
 
 ### Aggregation
+
+> Filters to only Diabetes patients (`$match`), then groups them by doctor and counts how many each doctor has (`$sum: 1`), then sorts by highest count first.
 
 ```javascript
 db.patients.aggregate([
@@ -218,6 +242,8 @@ db.patients.aggregate([
 
 The question asks for CRUD and the **five most expensive available books**, showing only title, author and price. 
 
+> Switches to `LibraryDB` and creates an empty `books` collection.
+
 ```javascript
 use LibraryDB
 
@@ -225,6 +251,8 @@ db.createCollection("books")
 ```
 
 ### Insert
+
+> Inserts 5 book documents with fields including ISBN, title, author, category, price, and availability status.
 
 ```javascript
 db.books.insertMany([
@@ -273,13 +301,19 @@ db.books.insertMany([
 
 ### CRUD
 
+> Returns all books in the collection.
+
 ```javascript
 db.books.find()
 ```
 
+> Returns only books where `availability` is `true`.
+
 ```javascript
 db.books.find({ availability: true })
 ```
+
+> Updates the price of the book with ISBN001 to 850.
 
 ```javascript
 db.books.updateOne(
@@ -288,11 +322,15 @@ db.books.updateOne(
 )
 ```
 
+> Deletes the book with ISBN004 from the collection.
+
 ```javascript
 db.books.deleteOne({ ISBN: "ISBN004" })
 ```
 
 ### Aggregation
+
+> Filters to only available books, shows only title/author/price (hides `_id`), sorts by highest price first, and returns the top 5.
 
 ```javascript
 db.books.aggregate([
@@ -332,6 +370,8 @@ $match → $project → $sort → $limit
 
 The question asks for account insertion, update/delete, and average balance branch-wise with the top 5 branches. 
 
+> Switches to `BankDB` and creates an empty `accounts` collection.
+
 ```javascript
 use BankDB
 
@@ -339,6 +379,8 @@ db.createCollection("accounts")
 ```
 
 ### Insert
+
+> Inserts 4 bank account documents, each with account number, customer name, account type, balance, and branch.
 
 ```javascript
 db.accounts.insertMany([
@@ -375,6 +417,8 @@ db.accounts.insertMany([
 
 ### Update
 
+> Updates the balance of account 1001 to 55000.
+
 ```javascript
 db.accounts.updateOne(
   { accountNo: 1001 },
@@ -384,11 +428,15 @@ db.accounts.updateOne(
 
 ### Delete
 
+> Removes account 1004 from the collection.
+
 ```javascript
 db.accounts.deleteOne({ accountNo: 1004 })
 ```
 
 ### Aggregation
+
+> Groups accounts by branch, calculates the average balance per branch using `$avg`, sorts branches by highest average balance first, and limits results to the top 5.
 
 ```javascript
 db.accounts.aggregate([
@@ -415,6 +463,8 @@ db.accounts.aggregate([
 
 The question asks for CRUD and an aggregation to filter a category, project fields, sort by price, and display the first 10. 
 
+> Switches to `ShopDB` and creates an empty `products` collection.
+
 ```javascript
 use ShopDB
 
@@ -422,6 +472,8 @@ db.createCollection("products")
 ```
 
 ### Insert
+
+> Inserts 3 product documents with productId, name, category, brand, price, and stock quantity.
 
 ```javascript
 db.products.insertMany([
@@ -454,13 +506,19 @@ db.products.insertMany([
 
 ### CRUD
 
+> Returns all products in the collection.
+
 ```javascript
 db.products.find()
 ```
 
+> Returns only products that belong to the "Electronics" category.
+
 ```javascript
 db.products.find({ category: "Electronics" })
 ```
+
+> Updates the stock of product 1 to 15 units.
 
 ```javascript
 db.products.updateOne(
@@ -469,11 +527,15 @@ db.products.updateOne(
 )
 ```
 
+> Deletes product 3 from the collection.
+
 ```javascript
 db.products.deleteOne({ productId: 3 })
 ```
 
 ### Aggregation
+
+> Filters to "Electronics" category, shows only name/brand/price (no `_id`), sorts by highest price first, and returns the top 10 products.
 
 ```javascript
 db.products.aggregate([
@@ -507,6 +569,8 @@ db.products.aggregate([
 
 The question asks for CRUD and department-wise average salary and employee count, sorted by average salary. 
 
+> Switches to `EmployeeDB` and creates an empty `employees` collection.
+
 ```javascript
 use EmployeeDB
 
@@ -514,6 +578,8 @@ db.createCollection("employees")
 ```
 
 ### Insert
+
+> Inserts 4 employee documents with employeeId, name, department, designation, salary, and years of experience.
 
 ```javascript
 db.employees.insertMany([
@@ -554,13 +620,19 @@ db.employees.insertMany([
 
 ### CRUD
 
+> Returns all employee documents.
+
 ```javascript
 db.employees.find()
 ```
 
+> Returns only employees who work in the "IT" department.
+
 ```javascript
 db.employees.find({ department: "IT" })
 ```
+
+> Updates employee 1's salary to 52000.
 
 ```javascript
 db.employees.updateOne(
@@ -569,11 +641,15 @@ db.employees.updateOne(
 )
 ```
 
+> Removes employee 4 from the collection.
+
 ```javascript
 db.employees.deleteOne({ employeeId: 4 })
 ```
 
 ### Aggregation
+
+> Groups employees by department, calculates average salary (`$avg`) and total headcount (`$sum: 1`) per department, then sorts by highest average salary first.
 
 ```javascript
 db.employees.aggregate([
@@ -598,6 +674,8 @@ db.employees.aggregate([
 
 The question asks for CRUD and the **top 5 highest-rated movies released after 2020**. 
 
+> Switches to `MovieDB` and creates an empty `movies` collection.
+
 ```javascript
 use MovieDB
 
@@ -605,6 +683,8 @@ db.createCollection("movies")
 ```
 
 ### Insert
+
+> Inserts 3 movie documents, each with movieName, director, genre, release year, rating, and an actors array.
 
 ```javascript
 db.movies.insertMany([
@@ -637,13 +717,19 @@ db.movies.insertMany([
 
 ### CRUD
 
+> Returns all movies in the collection.
+
 ```javascript
 db.movies.find()
 ```
 
+> Returns only movies where the `genre` is "Action".
+
 ```javascript
 db.movies.find({ genre: "Action" })
 ```
+
+> Updates the rating of "Movie A" to 8.8.
 
 ```javascript
 db.movies.updateOne(
@@ -652,11 +738,15 @@ db.movies.updateOne(
 )
 ```
 
+> Deletes "Movie C" from the collection.
+
 ```javascript
 db.movies.deleteOne({ movieName: "Movie C" })
 ```
 
 ### Aggregation
+
+> Filters to only movies released after 2020 (`$gt: 2020`), sorts by highest rating first, and returns the top 5.
 
 ```javascript
 db.movies.aggregate([
@@ -682,6 +772,8 @@ db.movies.aggregate([
 
 The question asks for CRUD and average package cost for each destination, sorted descending. 
 
+> Switches to `TravelDB` and creates an empty `tourists` collection.
+
 ```javascript
 use TravelDB
 
@@ -689,6 +781,8 @@ db.createCollection("tourists")
 ```
 
 ### Insert
+
+> Inserts 3 tourist documents with touristId, name, destination, age, country, and package cost.
 
 ```javascript
 db.tourists.insertMany([
@@ -721,13 +815,19 @@ db.tourists.insertMany([
 
 ### CRUD
 
+> Returns all tourist documents.
+
 ```javascript
 db.tourists.find()
 ```
 
+> Returns only tourists whose destination is "Goa".
+
 ```javascript
 db.tourists.find({ destination: "Goa" })
 ```
+
+> Updates tourist 1's package cost to 27000.
 
 ```javascript
 db.tourists.updateOne(
@@ -736,11 +836,15 @@ db.tourists.updateOne(
 )
 ```
 
+> Removes tourist 3 from the collection.
+
 ```javascript
 db.tourists.deleteOne({ touristId: 3 })
 ```
 
 ### Aggregation
+
+> Groups tourists by destination, calculates the average package cost per destination using `$avg`, and sorts by highest average cost first.
 
 ```javascript
 db.tourists.aggregate([
@@ -764,6 +868,8 @@ db.tourists.aggregate([
 
 The question asks for CRUD and total booking amount for each hotel, sorted by revenue and limited to 5. 
 
+> Switches to `HotelDB` and creates an empty `bookings` collection.
+
 ```javascript
 use HotelDB
 
@@ -771,6 +877,8 @@ db.createCollection("bookings")
 ```
 
 ### Insert
+
+> Inserts 3 booking documents with bookingId, customer name, hotel name, room type, number of nights, and total amount paid.
 
 ```javascript
 db.bookings.insertMany([
@@ -803,13 +911,19 @@ db.bookings.insertMany([
 
 ### CRUD
 
+> Returns all bookings in the collection.
+
 ```javascript
 db.bookings.find()
 ```
 
+> Returns only bookings made at "Hotel A".
+
 ```javascript
 db.bookings.find({ hotel: "Hotel A" })
 ```
+
+> Updates the number of nights for booking 1 to 4.
 
 ```javascript
 db.bookings.updateOne(
@@ -818,11 +932,15 @@ db.bookings.updateOne(
 )
 ```
 
+> Deletes booking 3 from the collection.
+
 ```javascript
 db.bookings.deleteOne({ bookingId: 3 })
 ```
 
 ### Aggregation
+
+> Groups bookings by hotel and sums up all the `amount` values to get each hotel's total revenue (`$sum: "$amount"`), then sorts by highest revenue first and shows only the top 5 hotels.
 
 ```javascript
 db.bookings.aggregate([
@@ -849,6 +967,8 @@ db.bookings.aggregate([
 
 The question specifically asks to calculate **order value = quantity × price**, then group by category and find average order value. 
 
+> Switches to `EcommerceDB` and creates an empty `orders` collection.
+
 ```javascript
 use EcommerceDB
 
@@ -856,6 +976,8 @@ db.createCollection("orders")
 ```
 
 ### Insert
+
+> Inserts 3 order documents with orderId, customer name, product, category, quantity, price, and order date.
 
 ```javascript
 db.orders.insertMany([
@@ -891,13 +1013,19 @@ db.orders.insertMany([
 
 ### CRUD
 
+> Returns all orders in the collection.
+
 ```javascript
 db.orders.find()
 ```
 
+> Returns only orders in the "Electronics" category.
+
 ```javascript
 db.orders.find({ category: "Electronics" })
 ```
+
+> Updates the quantity of order 1 to 3.
 
 ```javascript
 db.orders.updateOne(
@@ -906,11 +1034,15 @@ db.orders.updateOne(
 )
 ```
 
+> Deletes order 3 from the collection.
+
 ```javascript
 db.orders.deleteOne({ orderId: 3 })
 ```
 
 ### Aggregation
+
+> First uses `$project` with `$multiply` to compute a new `orderValue` field (quantity × price) for each order, then groups by category and calculates the average `orderValue` per category.
 
 ```javascript
 db.orders.aggregate([
@@ -935,7 +1067,7 @@ db.orders.aggregate([
 
 ### Important
 
-For multiplication:
+> `$multiply` takes an array of two field references and returns their product — used inside `$project` to create a computed field.
 
 ```javascript
 $multiply: ["$quantity", "$price"]
@@ -947,6 +1079,8 @@ $multiply: ["$quantity", "$price"]
 
 The question asks to group players by team, calculate average performance score, sort teams, and show the top 3. 
 
+> Switches to `SportsDB` and creates an empty `players` collection.
+
 ```javascript
 use SportsDB
 
@@ -954,6 +1088,8 @@ db.createCollection("players")
 ```
 
 ### Insert
+
+> Inserts 3 player documents with playerName, team, sport, age, matches played, runs/goals scored, and country.
 
 ```javascript
 db.players.insertMany([
@@ -989,13 +1125,19 @@ db.players.insertMany([
 
 ### CRUD
 
+> Returns all players in the collection.
+
 ```javascript
 db.players.find()
 ```
 
+> Returns only players who belong to "Team A".
+
 ```javascript
 db.players.find({ team: "Team A" })
 ```
+
+> Updates Arun's runsGoals to 2700.
 
 ```javascript
 db.players.updateOne(
@@ -1004,6 +1146,8 @@ db.players.updateOne(
 )
 ```
 
+> Removes John's document from the collection.
+
 ```javascript
 db.players.deleteOne({ playerName: "John" })
 ```
@@ -1011,6 +1155,8 @@ db.players.deleteOne({ playerName: "John" })
 ### Aggregation
 
 Here, since the question calls it a **performance score** but doesn't give a formula, the simplest interpretation is to use `runsGoals` as the performance score.
+
+> Groups players by team, calculates the average `runsGoals` as performance score, sorts teams by highest average first, and returns only the top 3 teams.
 
 ```javascript
 db.players.aggregate([
@@ -1039,6 +1185,8 @@ db.players.aggregate([
 
 This is the important one because it introduces **arrays and `$unwind`**. The question requires students to have enrolled courses and asks to display each course separately and count students per course. 
 
+> Switches to `SchoolDB` and creates an empty `students` collection.
+
 ```javascript
 use SchoolDB
 
@@ -1046,6 +1194,8 @@ db.createCollection("students")
 ```
 
 ### Insert
+
+> Inserts 3 student documents where the `courses` field is an **array** — each student is enrolled in multiple courses.
 
 ```javascript
 db.students.insertMany([
@@ -1075,11 +1225,13 @@ db.students.insertMany([
 
 ### Query
 
+> Returns all student documents.
+
 ```javascript
 db.students.find()
 ```
 
-Find students taking MongoDB:
+> Finds all students whose `courses` array contains "MongoDB" — MongoDB automatically searches inside arrays for a match.
 
 ```javascript
 db.students.find({
@@ -1089,7 +1241,7 @@ db.students.find({
 
 ### Update
 
-Add a course:
+> Uses `$push` to add "Java" to the end of student 1's `courses` array without removing existing entries.
 
 ```javascript
 db.students.updateOne(
@@ -1100,6 +1252,8 @@ db.students.updateOne(
 
 ### Delete
 
+> Removes the document for student 3 from the collection.
+
 ```javascript
 db.students.deleteOne({
   studentId: 3
@@ -1107,6 +1261,8 @@ db.students.deleteOne({
 ```
 
 ### `$unwind`
+
+> Flattens the `courses` array — each course in the array becomes a separate document row, so one student with 3 courses becomes 3 rows.
 
 ```javascript
 db.students.aggregate([
@@ -1132,6 +1288,8 @@ Arun → Data Science
 
 ### Count students in each course
 
+> First `$unwind` flattens the courses array into individual rows, then `$group` groups by course name and counts how many students are in each course using `$sum: 1`.
+
 ```javascript
 db.students.aggregate([
   {
@@ -1154,17 +1312,23 @@ For your internal exam, **don't memorize all 12 programs separately**. Memorize 
 
 ### 1. Database
 
+> Switch to (or create) a database by name.
+
 ```javascript
 use DatabaseName
 ```
 
 ### 2. Collection
 
+> Explicitly create an empty collection inside the current database.
+
 ```javascript
 db.createCollection("collectionName")
 ```
 
 ### 3. Insert one
+
+> Insert a single document (object) into a collection.
 
 ```javascript
 db.collection.insertOne({
@@ -1173,6 +1337,8 @@ db.collection.insertOne({
 ```
 
 ### 4. Insert many
+
+> Insert multiple documents at once by passing an array.
 
 ```javascript
 db.collection.insertMany([
@@ -1183,11 +1349,15 @@ db.collection.insertMany([
 
 ### 5. Read
 
+> Retrieve all documents from a collection.
+
 ```javascript
 db.collection.find()
 ```
 
 ### 6. Find with condition
+
+> Retrieve only documents that match a specific field-value filter.
 
 ```javascript
 db.collection.find({
@@ -1197,6 +1367,8 @@ db.collection.find({
 
 ### 7. Update
 
+> Find the first matching document and update a specific field using `$set` — only the listed field changes.
+
 ```javascript
 db.collection.updateOne(
   { field: "oldValue" },
@@ -1205,6 +1377,8 @@ db.collection.updateOne(
 ```
 
 ### 8. Delete
+
+> Find and permanently remove the first document that matches the condition.
 
 ```javascript
 db.collection.deleteOne({
@@ -1220,6 +1394,8 @@ This is the part I'd memorize most.
 
 ### `$match` = WHERE
 
+> Filters documents — only those matching the condition move to the next pipeline stage (like SQL's WHERE clause).
+
 ```javascript
 {
   $match: {
@@ -1229,6 +1405,8 @@ This is the part I'd memorize most.
 ```
 
 ### `$group` = GROUP BY
+
+> Groups documents by a field and computes aggregated values (like average, count, sum) for each group.
 
 ```javascript
 {
@@ -1240,6 +1418,8 @@ This is the part I'd memorize most.
 ```
 
 ### `$sum` = COUNT / TOTAL
+
+> `$sum: 1` counts the number of documents in a group; `$sum: "$field"` adds up the values of a numeric field.
 
 Count:
 
@@ -1255,11 +1435,15 @@ Total:
 
 ### `$avg` = Average
 
+> Calculates the arithmetic mean of a numeric field across all documents in a group.
+
 ```javascript
 { $avg: "$salary" }
 ```
 
 ### `$sort`
+
+> Orders the result documents — `-1` means descending (highest first), `1` means ascending (lowest first).
 
 Descending:
 
@@ -1282,6 +1466,8 @@ Ascending:
 
 ### `$limit`
 
+> Cuts the output to only the first N documents — use after `$sort` to get "top N" results.
+
 ```javascript
 {
   $limit: 5
@@ -1289,6 +1475,8 @@ Ascending:
 ```
 
 ### `$project`
+
+> Controls which fields appear in the output — `1` means include the field, `0` means exclude it.
 
 Choose fields:
 
@@ -1304,6 +1492,8 @@ Choose fields:
 
 ### `$multiply`
 
+> Multiplies two or more field values together — used inside `$project` to compute a new calculated field.
+
 ```javascript
 {
   $multiply: ["$quantity", "$price"]
@@ -1311,6 +1501,8 @@ Choose fields:
 ```
 
 ### `$unwind`
+
+> Deconstructs an array field so each element becomes its own separate document row — used when you need to process array items individually.
 
 Used when you have an **array**:
 

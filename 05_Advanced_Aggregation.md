@@ -2,11 +2,15 @@
 
 ## Use Database
 
+> Switches to (or creates) the `studentDB` database.
+
 ```javascript
 use studentDB
 ```
 
 ## Students Collection
+
+> Inserts two student documents that each have a `courseId` (for joining later) and a `subjects` array (for unwinding later).
 
 ```javascript
 db.students.insertMany([
@@ -31,6 +35,8 @@ db.students.insertMany([
 
 ## Courses Collection
 
+> Inserts two course documents into a separate `courses` collection — these will be joined with students using `$lookup`.
+
 ```javascript
 db.courses.insertMany([
     {
@@ -45,6 +51,8 @@ db.courses.insertMany([
 ```
 
 ## 1. Average using `$group` and `$avg`
+
+> Groups students by department and calculates the average marks for each department — like "Computer Science avg = 85".
 
 ```javascript
 db.students.aggregate([
@@ -61,6 +69,8 @@ db.students.aggregate([
 
 ## 2. Join Collections using `$lookup`
 
+> Joins the `students` collection with the `courses` collection — matches each student's `courseId` to the `_id` in `courses` and attaches the result as `courseDetails`.
+
 ```javascript
 db.students.aggregate([
     {
@@ -76,6 +86,8 @@ db.students.aggregate([
 
 ## 3. Array Unwinding using `$unwind`
 
+> Flattens the `subjects` array — each subject becomes its own separate document row instead of being grouped in an array.
+
 ```javascript
 db.students.aggregate([
     {
@@ -85,6 +97,8 @@ db.students.aggregate([
 ```
 
 ## 4. Combining `$lookup` and `$unwind`
+
+> First joins the `courses` collection into each student document, then `$unwind` flattens the resulting `courseDetails` array so each student row has a single course object (not an array).
 
 ```javascript
 db.students.aggregate([
