@@ -1,9 +1,3 @@
-Yes. I checked the uploaded MongoDB exercise. It contains **12 database questions**, each with CRUD + aggregation tasks. 
-
-Below are **ready-to-run MongoDB commands** for all of them. You can practice these directly in **MongoDB Compass Shell / mongosh**.
-
----
-
 # 1. CollegeDB — Students
 
 The question asks you to create `CollegeDB`, insert students, perform CRUD, and find the top 3 departments by average marks. 
