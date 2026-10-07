@@ -1,10 +1,126 @@
 # Program 9 – Books and Products Collection
 
 ## PART A – BOOKS
+## Use DataBase
+```
+use bookDB
+```
 
 ## Sample Data
-Use the 10 book documents provided in the exercise post.
-
+```
+db.books.insertMany([
+{
+  bookId: 101,
+  title: "MongoDB Basics",
+  author: "John Smith",
+  category: "Database",
+  isbn: "978100001",
+  price: 450,
+  stock: 25,
+  publisher: "Tech Press",
+  year: 2023
+},
+{
+  bookId: 102,
+  title: "Learning Python",
+  author: "Mark Lutz",
+  category: "Programming",
+  isbn: "978100002",
+  price: 850,
+  stock: 15,
+  publisher: "O'Reilly",
+  year: 2022
+},
+{
+  bookId: 103,
+  title: "Java Fundamentals",
+  author: "James Gosling",
+  category: "Programming",
+  isbn: "978100003",
+  price: 650,
+  stock: 30,
+  publisher: "Oracle Press",
+  year: 2021
+},
+{
+  bookId: 104,
+  title: "Data Science Handbook",
+  author: "Jake VanderPlas",
+  category: "Data Science",
+  isbn: "978100004",
+  price: 900,
+  stock: 12,
+  publisher: "O'Reilly",
+  year: 2023
+},
+{
+  bookId: 105,
+  title: "Machine Learning Essentials",
+  author: "Andrew Ng",
+  category: "AI",
+  isbn: "978100005",
+  price: 1200,
+  stock: 10,
+  publisher: "AI Publications",
+  year: 2024
+},
+{
+  bookId: 106,
+  title: "SQL Complete Guide",
+  author: "Chris Fehily",
+  category: "Database",
+  isbn: "978100006",
+  price: 550,
+  stock: 18,
+  publisher: "McGraw Hill",
+  year: 2020
+},
+{
+  bookId: 107,
+  title: "Node.js in Action",
+  author: "Mike Cantelon",
+  category: "Programming",
+  isbn: "978100007",
+  price: 700,
+  stock: 22,
+  publisher: "Manning",
+  year: 2023
+},
+{
+  bookId: 108,
+  title: "Deep Learning",
+  author: "Ian Goodfellow",
+  category: "AI",
+  isbn: "978100008",
+  price: 1500,
+  stock: 8,
+  publisher: "MIT Press",
+  year: 2024
+},
+{
+  bookId: 109,
+  title: "MongoDB Advanced",
+  author: "John Smith",
+  category: "Database",
+  isbn: "978100009",
+  price: 750,
+  stock: 20,
+  publisher: "Tech Press",
+  year: 2024
+},
+{
+  bookId: 110,
+  title: "Python for Data Analysis",
+  author: "Wes McKinney",
+  category: "Data Science",
+  isbn: "978100010",
+  price: 950,
+  stock: 14,
+  publisher: "O'Reilly",
+  year: 2023
+}
+])
+```
 ---
 
 ## 1. Find all the books
