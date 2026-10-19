@@ -8,6 +8,13 @@
 use studentDB
 ```
 
+**Output**
+```text
+switched to db studentDB
+```
+
+---
+
 ## Create Database (Insert First Document)
 
 > MongoDB only creates a database on disk when you insert the first document — this inserts one student record to make the database real.
@@ -19,6 +26,16 @@ db.students.insertOne({
 })
 ```
 
+**Output**
+```javascript
+{
+  acknowledged: true,
+  insertedId: ObjectId('6ab1234567890abcdef12345')
+}
+```
+
+---
+
 ## Current Database
 
 > Shows the name of the database you are currently working in.
@@ -26,6 +43,13 @@ db.students.insertOne({
 ```javascript
 db
 ```
+
+**Output**
+```text
+studentDB
+```
+
+---
 
 ## List Databases
 
@@ -35,6 +59,16 @@ db
 show dbs
 ```
 
+**Output**
+```text
+admin      40.00 KiB
+config     60.00 KiB
+local      40.00 KiB
+studentDB   8.00 KiB
+```
+
+---
+
 ## Show Collections
 
 > Lists all collections (like tables) inside the current database.
@@ -43,6 +77,13 @@ show dbs
 show collections
 ```
 
+**Output**
+```text
+students
+```
+
+---
+
 ## Delete Database
 
 > Switches to `studentDB` and permanently deletes it along with all its collections and documents.
@@ -50,4 +91,9 @@ show collections
 ```javascript
 use studentDB
 db.dropDatabase()
+```
+
+**Output**
+```javascript
+{ ok: 1, dropped: 'studentDB' }
 ```

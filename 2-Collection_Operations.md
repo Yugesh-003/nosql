@@ -10,6 +10,16 @@ use CollegeDB
 db.createCollection("students")
 ```
 
+**Output**
+```text
+switched to db CollegeDB
+```
+```javascript
+{ ok: 1 }
+```
+
+---
+
 ## Auto Create Collection
 
 > MongoDB automatically creates a collection when you insert into one that doesn't exist — this inserts one faculty document into a new `faculty` collection.
@@ -21,6 +31,16 @@ db.faculty.insertOne({
 })
 ```
 
+**Output**
+```javascript
+{
+  acknowledged: true,
+  insertedId: ObjectId('6ab1234567890abcdef12346')
+}
+```
+
+---
+
 ## View Collections
 
 > Lists all collections in the current database — you can use either of these two commands.
@@ -29,11 +49,24 @@ db.faculty.insertOne({
 show collections
 ```
 
+**Output**
+```text
+faculty
+students
+```
+
 or
 
 ```javascript
 db.getCollectionNames()
 ```
+
+**Output**
+```javascript
+[ 'faculty', 'students' ]
+```
+
+---
 
 ## Delete Collection
 
@@ -41,4 +74,9 @@ db.getCollectionNames()
 
 ```javascript
 db.students.drop()
+```
+
+**Output**
+```javascript
+true
 ```
