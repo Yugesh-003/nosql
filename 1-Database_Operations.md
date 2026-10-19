@@ -1,12 +1,4 @@
-# Install & Configure MongoDB
-
-## Open MongoDB Shell
-
-> Opens the MongoDB interactive shell where you can type and run database commands.
-
-```javascript
-mongosh
-```
+# Create, switch, list, and delete databases in MongoDB  
 
 ## Create / Switch Database
 
