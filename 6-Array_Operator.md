@@ -173,6 +173,34 @@ db.students.find({
 })
 ```
 
+```
+{ name: "Arun", marks: [45, 65, 85] }
+{ name: "Bala", marks: [30, 90, 95] }
+{ name: "Priya", marks: [55, 75, 90] }
+```
+```
+db.students.find({
+    marks: {
+        $elemMatch: {
+            $gt: 60,
+            $lt: 80
+        }
+    }
+})
+```
+```
+[
+    {
+        name: "Arun",
+        marks: [45, 65, 85]
+    },
+    {
+        name: "Priya",
+        marks: [55, 75, 90]
+    }
+]
+```
+
 ### Output
 
 ```text
@@ -426,6 +454,25 @@ db.students.updateOne(
     }
 )
 ```
+## Previous state 
+```javascript
+{
+    studentId: "S0501",
+    name: "Yugesh",
+    skills: ["Python", "Java"]
+}
+```
+## After query
+```javascript 
+{
+    studentId: "S0501",
+    name: "Yugesh",
+    skills: ["Python", "Java", "MongoDB", "SQL"]
+}
+```
+
+
+
 
 ### Output
 
