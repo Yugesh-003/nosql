@@ -1,4 +1,6 @@
 
+# pip install pymongo
+
 from pymongo import MongoClient
 
 # Connect to MongoDB
@@ -24,16 +26,18 @@ print("\nAll Sales Records:")
 for record in sales.find({}, {"_id": 0}):
     print(record)
 
-# 3. Calculate total sales by month
+# 3. Calculate total sales for each product
 pipeline = [
-    {"$sort": {"sales": -1}},
-    {"$limit":1}
+    {"$group":{
+        "_id":"$product",
+        "totalSales":{"$sum":"$sales"}
+    }}
 ]
 
 print("\nMonthly Sales Analysis:")
 for result in sales.aggregate(pipeline):
     print(result)
 
-# 6. Close connection
+# 4. Close connection
 client.close()
 print("\nConnection closed")
